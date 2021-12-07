@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir -p .github/_testbuilds
           touch .github/_testbuilds/test.c
-          cc -c -o .github/_testbuilds/test.${arch}.o -arch ${arch}
+          cc -c .github/_testbuilds/test.c -o .github/_testbuilds/test.${arch}.o -arch ${arch}
       - name: build
         run: make CFLAGS="-arch ${arch}"
 
