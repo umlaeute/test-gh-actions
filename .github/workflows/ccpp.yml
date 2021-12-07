@@ -38,7 +38,25 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: nmake
-        run: nmake -v || true
-      - name: build
-        run: nmake
+      - name: Build
+        shell: pwsh
+        run: |
+            $ErrorActionPreference = 'continue'
+            function exec
+            {
+                param ( [ScriptBlock] $ScriptBlock )
+                & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
+                if ($LastExitCode -ne 0) { exit $LastExitCode }
+            }
+            echo "ARCH_FLAGS = $env:ARCH_FLAGS"
+            Import-PackageProvider NuGet -Force
+            Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+            Install-Module Pscx -AllowClobber
+            Install-Module VSSetup -Scope CurrentUser
+            if($env:VS_VER -eq "2019")
+            {
+            }
+            else
+            {
+                Import-VisualStudioVars -VisualStudioVersion $env:VS_VER -Architecture $env:ARCHITECTURE
+            }
