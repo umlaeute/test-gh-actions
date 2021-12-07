@@ -41,41 +41,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #arch: ["x86", "amd64", "x64", "x86_64"]
-        arch: ["amd64"]
-          # '2010' and '90' yield "The system cannot find the path specified"
-          # although that's most likely due to the Import-VisualStudioVars call
-          #vs_ver: [2019, 2010, 90]
-        vs_ver: [2019]
-    env:
-      ARCHITECTURE: ${{ matrix.arch }}
-      VS_VER: ${{ matrix.vs_ver }}
+        arch: ["amd64", "amd64_x86", "amd64_arm64"]
     steps:
       - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch }}
       - name: Build
-        shell: pwsh
-        run: |
-            $ErrorActionPreference = 'continue'
-            function exec
-            {
-                param ( [ScriptBlock] $ScriptBlock )
-                & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
-                if ($LastExitCode -ne 0) { exit $LastExitCode }
-            }
-            echo "ARCH_FLAGS = $env:ARCH_FLAGS"
-            Import-PackageProvider NuGet -Force
-            Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-            Install-Module Pscx -AllowClobber
-            Install-Module VSSetup -Scope CurrentUser
-            if($env:VS_VER -eq "2019")
-            {
-            }
-            else
-            {
-                Import-VisualStudioVars -VisualStudioVersion $env:VS_VER -Architecture $env:ARCHITECTURE
-            }
-            nmake /f Makefile
-      - name: Only Build
         shell: pwsh
         run: |
             nmake /f Makefile
