@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: ["ppc", "i386", "x86_64", "amd64" ]
+        arch: ["ppc", "i386", "x86_64", "arm64", "arm" ]
     env:
       arch: ${{ matrix.arch }}
     steps:
