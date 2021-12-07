@@ -1,15 +1,44 @@
-name: C/C++ CI
+name: system tests
 
 on: [push]
 
 jobs:
-  build:
-
+  Ubuntu:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v1
-    - name: make
-      run: make
-    - name: make check
-      run: make check
+      - uses: actions/checkout@v2
+      - name: make
+        run: make
+      - name: make check
+        run: make check
+
+  macOS:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: ["ppc", "i386", "x86_64", "amd64" ]
+    env:
+      arch: ${{ matrix.arch }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: XCode version
+        run: |
+          pkgutil --pkg-info=com.apple.pkg.CLTools_Executables || true
+          xcodebuild -version || true
+      - name: supported archs
+        run: |
+          mkdir -p .github/_testbuilds
+          touch .github/_testbuilds/test.c
+          cc -c -o .github/_testbuilds/test.${arch}.o -arch ${arch}
+      - name: build
+        run: make CFLAGS="-arch ${arch}"
+
+  Windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: nmake
+        run: nmake -v || true
+      - name: build
+        run: nmake
