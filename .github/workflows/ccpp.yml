@@ -36,6 +36,14 @@ jobs:
 
   Windows:
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: ["x86", "amd64", "x64", "x86_64"]
+        vs_ver: [2019, 2010, 90]
+    env:
+      ARCHITECTURE: ${{ matrix.arch }}
+      VS_VER: ${{ matrix.vs_ver }}
     steps:
       - uses: actions/checkout@v2
       - name: Build
