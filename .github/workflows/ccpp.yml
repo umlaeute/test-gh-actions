@@ -74,3 +74,8 @@ jobs:
             {
                 Import-VisualStudioVars -VisualStudioVersion $env:VS_VER -Architecture $env:ARCHITECTURE
             }
+            nmake /f Makefile
+      - name: Only Build
+        shell: pwsh
+        run: |
+            nmake /f Makefile
