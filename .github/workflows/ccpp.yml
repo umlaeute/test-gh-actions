@@ -17,7 +17,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: ["ppc", "i386", "x86_64", "arm64", "arm" ]
+        #arch: ["ppc", "i386", "x86_64", "arm64", "arm" ]
+        # XCode-12.4, can compile 'i386' (deprecated warning), 'x86_64', 'arm64' (but fails with SDK10.15's <stdio.h>) and 'arm' (same as 'arm64')
+        arch: ["x86_64" ]
     env:
       arch: ${{ matrix.arch }}
     steps:
@@ -39,8 +41,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: ["x86", "amd64", "x64", "x86_64"]
-        vs_ver: [2019, 2010, 90]
+        #arch: ["x86", "amd64", "x64", "x86_64"]
+        arch: ["amd64"]
+          # '2010' and '90' yield "The system cannot find the path specified"
+          # although that's most likely due to the Import-VisualStudioVars call
+          #vs_ver: [2019, 2010, 90]
+        vs_ver: [2019]
     env:
       ARCHITECTURE: ${{ matrix.arch }}
       VS_VER: ${{ matrix.vs_ver }}
