@@ -22,7 +22,7 @@ jobs:
           echo "BAR: ${BAR}"
       - name: find executable files
         run: |
-          if find . -type f -executable | grep .; then
+          if find . -type f -executable -iregex '.*\.\(pd\|txt\|h\|c[^.]*\|h[^.]*\)$' | grep .; then
             echo "EXECUTABLE FILES FOUND"
             exit 1
           fi
