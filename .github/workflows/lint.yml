@@ -38,9 +38,6 @@ jobs:
         fetch-depth: 0
     - name: git log --oneline
       run: git log --oneline
-    - name: bla bla
-      run: |
-        echo bla bla
     - name: git log --check
       id: check_out
       run: |
