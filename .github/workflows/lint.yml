@@ -1,0 +1,26 @@
+name: coding standards
+
+on: [push]
+
+jobs:
+  executable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: ungit
+        run: rm -rf .git
+      - name: store variable
+        run: set FOO=foo
+        env:
+          BAR: bar
+      - name: retrieve variables
+        run: |
+          echo "FOO: ${FOO}"
+          echo "BAR: ${BAR}"
+      - name: find executable files
+        run: |
+          if find . -type f -executable | grep .; then
+            echo "EXECUTABLE FILES FOUND"
+            exit 1
+          fi
+
