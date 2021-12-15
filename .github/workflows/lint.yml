@@ -45,8 +45,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: git log --oneline
-      run: git log --oneline
+    - name: git diff-index
+      run: git diff-index -p --check --cached ${{github.event.pull_request.base.sha}} --
     - name: git log --check
       id: check_out
       run: |
