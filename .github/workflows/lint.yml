@@ -31,9 +31,11 @@ jobs:
   gitlog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: git log --oneline
-        run: git log --oneline
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: git log --oneline
+      run: git log --oneline
 
   check-whitespace:
     if: ${{ github.event_name == 'pull_request' && ( github.event.action == 'opened' || github.event.action == 'synchronize' ) }}
