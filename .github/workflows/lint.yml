@@ -11,9 +11,10 @@ jobs:
         run: rm -rf .git
       - name: store variable
         run: |
-          set FOO=foo
+          FOO=foo
           echo "FOO: ${FOO}"
           echo "BAR: ${BAR}"
+          echo "FOO=fufu" >> $GITHUB_ENV
         env:
           BAR: bar
       - name: retrieve variables
