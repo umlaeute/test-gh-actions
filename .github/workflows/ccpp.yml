@@ -36,18 +36,18 @@ jobs:
       - name: build
         run: make CFLAGS="-arch ${arch}"
 
-  Windows:
-    runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: ["amd64", "amd64_x86", "amd64_arm64"]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: ${{ matrix.arch }}
-      - name: Build
-        shell: pwsh
-        run: |
-            nmake /f Makefile
+#  Windows:
+#    runs-on: windows-latest
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        arch: ["amd64", "amd64_x86", "amd64_arm64"]
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: ilammy/msvc-dev-cmd@v1
+#        with:
+#          arch: ${{ matrix.arch }}
+#      - name: Build
+#        shell: pwsh
+#        run: |
+#            nmake /f Makefile
