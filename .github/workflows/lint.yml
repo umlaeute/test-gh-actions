@@ -28,19 +28,15 @@ jobs:
             throw "Some files are now executable but shouldn't be"
             exit 1
           fi
-  gitlog:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: SHAs
-      run: |
-        echo github.event.pull_after ${{github.event.pull_after}}
-        echo github.event.head_ref ${{github.event.head_ref}}
-        echo github.event.pull_request.base.sha ${{github.event.pull_request.base.sha}}
-    - name: git log --oneline
-      run: git log --oneline ${{github.event.pull_request.base.sha}}
+
+#  gitlog:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#      with:
+#        fetch-depth: 0
+#    - name: git log --oneline
+#      run: git log --oneline ${{github.event.pull_request.base.sha}}
 
   check-whitespace:
     if: ${{ github.event_name == 'pull_request' && ( github.event.action == 'opened' || github.event.action == 'synchronize' ) }}
