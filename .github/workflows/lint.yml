@@ -30,9 +30,7 @@ jobs:
           fi
 
   check-whitespace:
-    on:
-      pull_request:
-        types: [opened, synchronize]
+    if: ${{ github.event_name == 'pull_request' && contains( [opened, synchronize], github.event.action )}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
