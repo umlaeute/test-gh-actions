@@ -3,7 +3,7 @@ name: coding standards
 on: [push]
 
 jobs:
-  illegally executable files:
+  illegally_executable_files:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
