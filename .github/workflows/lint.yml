@@ -36,7 +36,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: git diff-index
+    - name: novged
+      id: nudel
       run: |
         echo bla
     - name: git log --check
