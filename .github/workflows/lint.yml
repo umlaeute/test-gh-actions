@@ -10,7 +10,10 @@ jobs:
       - name: ungit
         run: rm -rf .git
       - name: store variable
-        run: set FOO=foo
+        run: |
+          set FOO=foo
+          echo "FOO: ${FOO}"
+          echo "BAR: ${BAR}"
         env:
           BAR: bar
       - name: retrieve variables
