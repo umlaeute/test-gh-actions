@@ -40,9 +40,10 @@ jobs:
       run: git log --oneline
     - name: SHAs
       run: |
-        echo github.event.pull_after ${{github.event.pull_after}}
-        echo github.event.head_ref ${{github.event.head_ref}}
-        echo github.event.pull_request.base.sha ${{github.event.pull_request.base.sha}}
+        echo SHAs
+        #        echo github.event.pull_after ${{github.event.pull_after}}
+        #echo github.event.head_ref ${{github.event.head_ref}}
+        #        echo github.event.pull_request.base.sha ${{github.event.pull_request.base.sha}}
     - name: git log --check
       id: check_out
       run: |
