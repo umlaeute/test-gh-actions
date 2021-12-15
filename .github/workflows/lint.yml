@@ -35,7 +35,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: git log --oneline
-      run: git log --oneline
+      run: git log --oneline ${{github.event.pull_request.base.sha}}
 
   check-whitespace:
     if: ${{ github.event_name == 'pull_request' && ( github.event.action == 'opened' || github.event.action == 'synchronize' ) }}
