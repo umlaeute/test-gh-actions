@@ -1,5 +1,5 @@
 
-!include <win32.mak>
+#!include <win32.mak>
 
 all: test.exe
 
