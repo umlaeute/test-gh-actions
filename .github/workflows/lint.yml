@@ -30,7 +30,7 @@ jobs:
           fi
 
   check-whitespace:
-    if: ${{ github.event_name == 'pull_request' && (github.event.action == "opened" || github.event.action == "synchronize") }}
+    if: ${{ github.event_name == 'pull_request' && ( github.event.action == "opened" || github.event.action == "synchronize" ) }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
