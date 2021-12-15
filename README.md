@@ -2,4 +2,5 @@ testing github actions
 ======================
 
 
-why does this not trigger a PR action?
+Q: why does this not trigger a PR action?
+A: because there is a merge conflict!
