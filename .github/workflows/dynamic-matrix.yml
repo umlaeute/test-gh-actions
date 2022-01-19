@@ -28,5 +28,9 @@ jobs:
     container: buildpack-deps:${{ matrix.series }}
 
     steps:
+      - name: install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lsb-release
       - name: get distribution
         run: lsb_release -a
