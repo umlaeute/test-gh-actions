@@ -9,8 +9,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: install dependencies
         run: |
-          apt-get update
-          apt-get -y --no-install-recommends install curl jq
+          sudo apt-get update
+          sudo apt-get -y install curl jq
       - name: generate matrix
         id: set-matrix
         run: |
