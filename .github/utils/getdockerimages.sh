@@ -10,11 +10,11 @@ filter() {
 }
 gettags() {
 # get all available tags for the 'buildpack-deps' Docker image
-curl -s "https://hub.docker.com/v2/repositories/library/${1}/tags?page_size=1000" | jq -r '.results[] | .name' | filter
+	curl -s "https://hub.docker.com/v2/repositories/library/${1}/tags?page_size=1000" | jq -r '.results[] | .name' | filter
 }
 
 getdist() {
-   curl -s "${1}/dists/" | grep "href=" | sed -e 's|.*a href="||' -e 's|".*||' -e 's|/$||' | filter
+	curl -s "${1}/dists/" | grep "href=" | sed -e 's|.*a href="||' -e 's|".*||' -e 's|/$||' | filter
 }
 getdists() {
 	local url
