@@ -22,15 +22,20 @@ jobs:
   generate_matrix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: install dependencies
         run: |
           sudo apt-get update
           sudo apt-get -y install curl jq
-      - name: generate matrix
-        id: set-matrix
+      - name: create matrix
+        # the following does:
+        # - fetch all available tags for the "buildpack-deps" Docker image
+        # - fetch all available Ubuntu and Debian releases (that are still hosted on the distros' archive servers)
+        # - get the intersection of the tags and the releaess
+        # - drop some releases (e.g. 'oldstable')
+        # - format as a JSON array
         run: |
-          echo "::set-output name=matrix::$(.github/utils/getdockerimages.sh)"
+          echo ::set-output name=matrix::$(true; (curl -s "https://hub.docker.com/v2/repositories/library/buildpack-deps/tags?page_size=1000" | jq -r '.results[] | .name' | sed -e '/[^a-z]/d' -e '/stable$/d' -e '/^\(testing\|experimental\)$/d' | sort -u; for url in http://archive.ubuntu.com/ubuntu http://deb.debian.org/debian; do curl -s "${url}/dists/" | grep "href=" | sed -e 's|.*a href="||' -e 's|".*||' -e 's|/$||'; done | sed -e '/[^a-z]/d' -e '/stable$/d' -e '/^\(testing\|experimental\)$/d' | sort -u) | sort | uniq -d | while read x; do echo -n '"'${x}'" '; done | sed -e 's|^ *|[|' -e 's| *$|]|' -e 's|  *|,|g')
+        id: set-matrix
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
