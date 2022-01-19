@@ -39,3 +39,7 @@ jobs:
           apt-get install -y lsb-release
       - name: get distribution
         run: lsb_release -a
+      - name: set variable
+        run: codename=$(lsb_release -sc)
+      - name: show variable
+        run: echo ${codename}
