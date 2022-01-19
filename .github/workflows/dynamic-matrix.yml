@@ -42,4 +42,4 @@ jobs:
       - name: set variable
         run: codename=$(lsb_release -sc)
       - name: show variable
-        run: echo ${codename}
+        run: echo "Codename: ${codename}"
