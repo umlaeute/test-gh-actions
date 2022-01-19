@@ -3,22 +3,6 @@ name: dynamic matrix
 on: [push]
 
 jobs:
-  script1:
-    runs-on: ubuntu-latest
-    steps:
-      - name: create script
-        run: |
-          MY_STRING=$(cat << EOF
-          first line
-          second line
-          third line
-          EOF
-          )
-          echo "$MY_STRING"
-          echo "$MY_STRING" > script.sh
-      - name: show script
-        run: cat script.sh
-
   generate_matrix:
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +35,7 @@ jobs:
     steps:
       - name: install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lsb-release
+          apt-get update
+          apt-get install -y lsb-release
       - name: get distribution
         run: lsb_release -a
