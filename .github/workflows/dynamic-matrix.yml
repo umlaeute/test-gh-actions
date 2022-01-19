@@ -6,24 +6,18 @@ jobs:
   script1:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-        cat >script.sh <<EOF
-        echo "foo"
-        echo "bar: \${rosko}"
-        EOF
-      - run: cat script.sh
-
-  script2:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-        cat >script.sh <<EOF
-echo "foo"
-echo "bar: \${rosko}"
-EOF
-      - run: cat script.sh
-
-
+      - name: create script
+        run: |
+          MY_STRING=$(cat << EOF
+          first line
+          second line
+          third line
+          EOF
+          )
+          echo "$MY_STRING"
+          echo "$MY_STRING" > script.sh
+      - name: show script
+        run: cat script.sh
 
   generate_matrix:
     runs-on: ubuntu-latest
