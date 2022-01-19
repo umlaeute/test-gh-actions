@@ -3,6 +3,28 @@ name: dynamic matrix
 on: [push]
 
 jobs:
+  script1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+        cat >script.sh <<EOF
+        echo "foo"
+        echo "bar: \${rosko}"
+        EOF
+      - run: cat script.sh
+
+  script2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+        cat >script.sh <<EOF
+echo "foo"
+echo "bar: \${rosko}"
+EOF
+      - run: cat script.sh
+
+
+
   generate_matrix:
     runs-on: ubuntu-latest
     steps:
