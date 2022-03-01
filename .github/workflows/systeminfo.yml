@@ -1,0 +1,24 @@
+name: System Info
+
+on: [push]
+
+jobs:
+  SystemInfo:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - name: Install MSYS2
+        if: runner.os == 'windows.latest'
+        uses: msys2/setup-msys2@v2
+        with:
+          path-type: inherit
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Info
+        run: ./systeminfo.sh
