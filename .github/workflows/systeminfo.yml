@@ -9,12 +9,19 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Info
+        run: ./systeminfo.sh
+
+  MSys2Info:
+    runs-on: windows-latest
     defaults:
       run:
         shell: msys2 {0}
     steps:
       - name: Install MSYS2
-        if: runner.os == 'windows.latest'
         uses: msys2/setup-msys2@v2
         with:
           path-type: inherit
