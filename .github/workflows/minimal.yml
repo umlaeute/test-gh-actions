@@ -8,7 +8,12 @@ jobs:
       fail-fast: false
       matrix:
         float: [32, 64]
-        msystem: [UCRT64, MINGW32, MINGW64, CLANG64, CLANGARM64]
+        msystem:
+          - UCRT64
+          - MINGW32
+          - MINGW64
+          - CLANG64
+          - CLANGARM64
         include:
           # the extra 'msys' msystem runs once (only!), but without a 'float'
           - msystem: MSYS
