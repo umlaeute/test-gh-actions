@@ -33,6 +33,7 @@ jobs:
         with:
           msystem: ${{ matrix.msystem }}
           release: false
+          path-type: inherit
       - name: Hello World
         run: |
           echo hello world
