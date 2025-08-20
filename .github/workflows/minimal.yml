@@ -18,7 +18,7 @@ jobs:
           - msystem: mingw32
             runner: windows-latest
           - msystem: clangarm64
-            runner: windows-latest
+            runner: windows-11-arm
     runs-on: ubuntu-latest
     steps:
       - name: hello
