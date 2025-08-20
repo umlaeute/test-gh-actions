@@ -8,18 +8,20 @@ jobs:
       fail-fast: false
       matrix:
         float: [32, 64]
-        msystem: [mingw64, mingw32, clang64, clangarm64]
+        msystem: [UCRT64, MINGW32, MINGW64, CLANG64, CLANGARM64]
         include:
-          # the extra 'ucrt64' msystem runs once (only!), but without a 'float'
-          - msystem: ucrt64
+          # the extra 'msys' msystem runs once (only!), but without a 'float'
+          - msystem: MSYS
             runner: windows-latest
-          - msystem: mingw64
+          - msystem: UCRT64
             runner: windows-latest
-          - msystem: mingw32
+          - msystem: MINGW64
             runner: windows-latest
-          - msystem: clang64
+          - msystem: MINGW32
             runner: windows-latest
-          - msystem: clangarm64
+          - msystem: CLANG64
+            runner: windows-latest
+          - msystem: CLANGARM64
             runner: windows-11-arm
     runs-on: ${{ matrix.runner }}
     defaults:
