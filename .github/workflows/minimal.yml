@@ -7,16 +7,16 @@ jobs:
     strategy:
       matrix:
         float: [32, 64]
-        # extra 'clang64' msystem
-        msystem: [ucrt64, mingw64, mingw32, clang64]
+        # the extra 'clang64' msystem is executed, but without a 'runner'
+        msystem: [mingw64, mingw32, clang64, clangarm64]
         include:
+          # the extra 'ucrt64' msystem, but without a 'float'
           - msystem: ucrt64
             runner: windows-latest
           - msystem: mingw64
             runner: windows-latest
           - msystem: mingw32
             runner: windows-latest
-          # extra 'clangarm64' msystem
           - msystem: clangarm64
             runner: windows-latest
     runs-on: ubuntu-latest
