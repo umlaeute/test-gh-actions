@@ -33,6 +33,8 @@ jobs:
         with:
           msystem: ${{ matrix.msystem }}
           release: true
+          pacboy: >-
+            toolchain:p
       - name: Hello World
         run: |
           echo hello world
