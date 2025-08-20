@@ -10,7 +10,7 @@ jobs:
         # the extra 'clang64' msystem is executed, but without a 'runner'
         msystem: [mingw64, mingw32, clang64, clangarm64]
         include:
-          # the extra 'ucrt64' msystem, but without a 'float'
+          # the extra 'ucrt64' msystem runs once (only!), but without a 'float'
           - msystem: ucrt64
             runner: windows-latest
           - msystem: mingw64
