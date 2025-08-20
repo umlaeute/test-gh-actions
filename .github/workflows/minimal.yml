@@ -6,23 +6,24 @@ jobs:
   mjob:
     strategy:
       matrix:
-        fruit: [apple, pear]
-        animal: [cat, dog]
+        float: [32, 64]
+        # extra 'clang64' msystem
+        msystem: [ucrt64, mingw64, mingw32, clang64]
         include:
-          - color: green
-          - color: pink
-            animal: cat
-          - fruit: apple
-            shape: circle
-          - fruit: banana
-          - fruit: banana
-            animal: cat
+          - msystem: ucrt64
+            runner: windows-latest
+          - msystem: mingw64
+            runner: windows-latest
+          - msystem: mingw32
+            runner: windows-latest
+          # extra 'clangarm64' msystem
+          - msystem: clangarm64
+            runner: windows-latest
     runs-on: ubuntu-latest
     steps:
       - name: hello
         run: |
           echo hello world
-          echo "fruit : ${{ matrix.fruit }}"
-          echo "animal: ${{ matrix.animal }}"
-          echo "color : ${{ matrix.color }}"
-          echo "shape : ${{ matrix.shape }}"
+          echo "float  : ${{ matrix.float }}"
+          echo "msystem: ${{ matrix.msystem }}"
+          echo "runner : ${{ matrix.runner }}"
