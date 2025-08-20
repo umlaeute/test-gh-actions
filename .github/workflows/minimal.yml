@@ -35,6 +35,7 @@ jobs:
           release: true
           pacboy: >-
             toolchain:p
+            base-devel:
       - name: Hello World
         run: |
           echo hello world
