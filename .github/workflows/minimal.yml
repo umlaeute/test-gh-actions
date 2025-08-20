@@ -7,7 +7,6 @@ jobs:
     strategy:
       matrix:
         float: [32, 64]
-        # the extra 'clang64' msystem is executed, but without a 'runner'
         msystem: [mingw64, mingw32, clang64, clangarm64]
         include:
           # the extra 'ucrt64' msystem runs once (only!), but without a 'float'
@@ -16,6 +15,8 @@ jobs:
           - msystem: mingw64
             runner: windows-latest
           - msystem: mingw32
+            runner: windows-latest
+          - msystem: clang64
             runner: windows-latest
           - msystem: clangarm64
             runner: windows-11-arm
