@@ -5,6 +5,7 @@ on: [push]
 jobs:
   mjob:
     strategy:
+      fail-fast: false
       matrix:
         float: [32, 64]
         msystem: [mingw64, mingw32, clang64, clangarm64]
