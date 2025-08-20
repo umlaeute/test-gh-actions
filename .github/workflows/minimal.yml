@@ -42,6 +42,8 @@ jobs:
           echo "msystem: ${{ matrix.msystem }}"
           echo "runner : ${{ matrix.runner }}"
           uname -a || true
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Build
         run: |
           make || true
