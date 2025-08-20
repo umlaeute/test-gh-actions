@@ -5,10 +5,18 @@ on: [push]
 jobs:
   mjob:
     strategy:
-      fail-fast: false
       matrix:
-        character: [A, B]
-        number: [42, 666]
+        fruit: [apple, pear]
+        animal: [cat, dog]
+        include:
+          - color: green
+          - color: pink
+            animal: cat
+          - fruit: apple
+            shape: circle
+          - fruit: banana
+          - fruit: banana
+            animal: cat
     runs-on: ubuntu-latest
     steps:
       - name: hello
