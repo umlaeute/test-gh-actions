@@ -39,4 +39,4 @@ jobs:
           echo "float  : ${{ matrix.float }}"
           echo "msystem: ${{ matrix.msystem }}"
           echo "runner : ${{ matrix.runner }}"
-          uname
+          uname -a || true
