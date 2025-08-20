@@ -19,7 +19,7 @@ jobs:
           - msystem: MSYS
           - msystem: CLANGARM64
             runner: windows-11-arm
-    runs-on: ${{ matrix.runner || windows-latest }}
+    runs-on: ${{ matrix.runner || 'windows-latest' }}
     defaults:
       run:
         shell: msys2 {0}
