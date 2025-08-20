@@ -41,3 +41,8 @@ jobs:
           echo "msystem: ${{ matrix.msystem }}"
           echo "runner : ${{ matrix.runner }}"
           uname -a || true
+      - name: Build
+        run: |
+          make || true
+          file test*
+          make check
