@@ -1,9 +1,14 @@
-name: Minimal actions
+name: 2d action matrix
 
 on: [push]
 
 jobs:
-  Ubuntu:
+  mjob:
+    strategy:
+      fail-fast: false
+      matrix:
+        character: [A, B]
+        number: [42, 666]
     runs-on: ubuntu-latest
     steps:
       - name: hello
