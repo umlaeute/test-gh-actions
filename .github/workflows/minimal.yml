@@ -19,11 +19,20 @@ jobs:
             runner: windows-latest
           - msystem: clangarm64
             runner: windows-11-arm
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
-      - name: hello
+      - name: Install MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{ matrix.msystem }}
+          release: false
+      - name: Hello World
         run: |
           echo hello world
           echo "float  : ${{ matrix.float }}"
           echo "msystem: ${{ matrix.msystem }}"
           echo "runner : ${{ matrix.runner }}"
+          uname
